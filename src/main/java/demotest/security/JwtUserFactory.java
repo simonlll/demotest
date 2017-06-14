@@ -19,7 +19,7 @@ public final class JwtUserFactory {
     }
 
     public static JwtUser create(AdminUser user) {
-        return new JwtUser(user.getId().toString(), user.getUsername(), user.getPassword(), mapToGrantedAuthorities(user.getRoles()));
+        return new JwtUser(user.getId().toString(), user.getUsername(), user.getPassword(), mapToGrantedAuthorities(user.getRoles()), user.getLastPasswordResetDate());
     }
 
     private static List<GrantedAuthority> mapToGrantedAuthorities(List<String> authorities) {
