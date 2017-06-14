@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.sasl.AuthenticationException;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by simon on 2017/6/2.
@@ -17,6 +18,7 @@ import javax.security.sasl.AuthenticationException;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class AuthController {
+    //header: Authorization
     @Value("${jwt.header}")
     private String tokenHeader;
 
@@ -32,5 +34,16 @@ public class AuthController {
     @RequestMapping(value = "/auth/register", method = RequestMethod.POST)
     public AdminUser register(@RequestBody AdminUser user) throws AuthenticationException {
         return authService.register(user);
+    }
+
+    @RequestMapping(value = "/auth/refresh", method = RequestMethod.GET)
+    public ResponseEntity<?> refreshToken(HttpServletRequest request) {
+        String token = request.getHeader(tokenHeader);
+        String refreshedToken = authService.refresh(token);
+        if (refreshedToken == null) {
+            return ResponseEntity.badRequest().body(null);
+        } else {
+            return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
+        }
     }
 }
