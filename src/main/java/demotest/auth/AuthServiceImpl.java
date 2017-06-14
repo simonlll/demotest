@@ -4,6 +4,7 @@ import demotest.dao.AdminUserRepository;
 import demotest.entity.AdminUser;
 import demotest.entity.Role;
 import demotest.security.JwtTokenUtil;
+import demotest.security.JwtUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,6 +32,7 @@ public class AuthServiceImpl implements AuthService {
     private JwtTokenUtil jwtTokenUtil;
     private AdminUserRepository adminUserRepository;
 
+    //tokenHead: Bearer
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
@@ -103,5 +105,21 @@ public class AuthServiceImpl implements AuthService {
         final String token = jwtTokenUtil.generateToken(userDetails);
         System.out.println("token: " + token);
         return token;
+    }
+
+    /**
+     * 刷新Token, 逻辑是： 如果token未过期，并且token创建之后，没有重置密码，就刷新token
+     * @param oldToken
+     * @return
+     */
+    @Override
+    public String refresh(String oldToken) {
+        final String token = oldToken.substring(tokenHead.length());
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
+        if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
+            return jwtTokenUtil.refreshToken(token);
+        }
+        return null;
     }
 }
