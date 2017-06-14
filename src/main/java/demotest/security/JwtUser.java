@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by simon on 2017/6/2.
@@ -13,15 +14,17 @@ public class JwtUser implements UserDetails {
     private final String id;
     private final String username;
     private final String password;
+    private Date lastPasswordResetDate;
     //存储用户拥有的角色
     private final Collection<? extends GrantedAuthority> authorities;
 
 
-    public JwtUser(String id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public JwtUser(String id, String username, String password, Collection<? extends GrantedAuthority> authorities, Date lastPasswordResetDate) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
+        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
     @Override
@@ -44,7 +47,6 @@ public class JwtUser implements UserDetails {
     public String getUsername() {
         return username;
     }
-
 
     //账户是否未过期
     @JsonIgnore
@@ -73,5 +75,10 @@ public class JwtUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @JsonIgnore
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
     }
 }
