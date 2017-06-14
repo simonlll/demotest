@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +21,21 @@ public class AdminUser {
     private String password;
 
     private String email;
+
+    public Date lastPasswordResetDate;
+
+    public void setRole(List<Role> role) {
+        this.role = role;
+    }
+
+
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
 
     public String getEmail() {
         return email;
@@ -42,9 +58,7 @@ public class AdminUser {
         return roleList;
     }
 
-    public void setRole(List<Role> role) {
-        this.role = role;
-    }
+
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "adminuser_id")
