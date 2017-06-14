@@ -1,0 +1,30 @@
+# JWT
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  tokenHead: "Bearer "
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+      register: "auth/register"
+
+
+
+# Logging configuration
+logging:
+  level:
+    org.springframework:
+      data: DEBUG
+      security: DEBUG
+
+
+spring:
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+
+
+server:
+  contextPath:
