@@ -64,6 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.js").permitAll()
                 //允许对登录页面 /auth的访问
                 .antMatchers("/auth/**").permitAll()
+                .antMatchers("/druid/**").permitAll()
                 //允许跨域请求中进行预检的options请求
                 .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 .anyRequest().authenticated();

@@ -58,6 +58,12 @@
 			<artifactId>spring-data-rest-hal-browser</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.27</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt 对JWT的支持 -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
