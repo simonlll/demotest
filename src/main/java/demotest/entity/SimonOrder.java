@@ -10,6 +10,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+//@NamedStoredProcedureQuery(name = "test", procedureName = "test", parameters = {
+//        @StoredProcedureParameter(mode = ParameterMode.IN, name="startrow", type=Integer.class),
+//        @StoredProcedureParameter(mode = ParameterMode.IN, name="pagesize", type=Integer.class)
+//})
 public class SimonOrder {
 
     @Id

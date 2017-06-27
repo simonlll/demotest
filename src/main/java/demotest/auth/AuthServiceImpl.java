@@ -122,4 +122,9 @@ public class AuthServiceImpl implements AuthService {
         }
         return null;
     }
+
+    @Override
+    public String logout(String token) {
+        return null;
+    }
 }

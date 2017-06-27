@@ -46,4 +46,10 @@ public class AuthController {
             return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
         }
     }
+
+    @RequestMapping(value = "/auth/logout", method = RequestMethod.DELETE)
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        String token = request.getHeader(tokenHeader);
+        return ResponseEntity.ok("token delete");
+    }
 }

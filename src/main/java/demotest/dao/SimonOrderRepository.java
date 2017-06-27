@@ -5,11 +5,16 @@ package demotest.dao;
  */
 
 import demotest.entity.SimonOrder;
+import org.springframework.data.jpa.repository.query.Procedure;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -21,4 +26,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @CrossOrigin(origins = "http://localhost:3000")
 @RepositoryRestResource(collectionResourceRel = "simonorder", path = "simonorder")
 public interface SimonOrderRepository  extends CrudRepository<SimonOrder, Long>{
+
 }

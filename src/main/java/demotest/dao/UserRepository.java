@@ -3,16 +3,7 @@ package demotest.dao;
 /**
  * Created by simon on 2017/5/23.
  */
-//import org.springframework.data.repository.CrudRepository;
-//
-//
-//
-//// This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
-//// CRUD refers Create, Read, Update, Delete
-//
-//public interface UserRepository extends CrudRepository<User, Long> {
-//
-//}
+
 
 import demotest.entity.User;
 import org.springframework.security.access.prepost.PreAuthorize;
